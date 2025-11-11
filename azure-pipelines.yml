@@ -20,3 +20,17 @@ jobs:
       TargetFolder: $(Build.ArtifactStagingDirectory)
   - upload: $(Build.ArtifactStagingDirectory)
     artifact: drop
+
+- deployment: VMDeploy
+  displayName: Web deploy
+  dependsOn: Build
+  condition: succeeded()
+  environment:
+    name: <environment-name>
+    resourceType: VirtualMachine
+    tags: <VMtag>
+  strategy:
+     runOnce:
+       deploy:
+          steps:
+          - script: echo my first deployment
