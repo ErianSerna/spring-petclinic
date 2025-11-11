@@ -160,6 +160,7 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-enforcer-plugin</artifactId>
+        <version>3.6.1</version>
         <executions>
           <execution>
             <id>enforce-java</id>
@@ -169,8 +170,7 @@
             <configuration>
               <rules>
                 <requireJavaVersion>
-                  <message>This build requires at least Java ${java.version}, update your JVM, and run the build again</message>
-                  <version>${java.version}</version>
+                  <version>[21,)</version>
                 </requireJavaVersion>
               </rules>
             </configuration>
