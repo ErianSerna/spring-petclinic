@@ -8,16 +8,25 @@ jobs:
 - job: Build
   displayName: Build Maven Project
   steps:
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: '21'
+      jdkArchitectureOption: 'x64'
+      jdkSourceOption: 'PreInstalled'
+    displayName: 'Set up Java 21'
+
   - task: Maven@4
     displayName: 'Maven Package'
     inputs:
       mavenPomFile: 'pom.xml'
+
   - task: CopyFiles@2
     displayName: 'Copy Files to artifact staging directory'
     inputs:
       SourceFolder: '$(System.DefaultWorkingDirectory)'
       Contents: '**/target/*.?(war|jar)'
       TargetFolder: $(Build.ArtifactStagingDirectory)
+
   - upload: $(Build.ArtifactStagingDirectory)
     artifact: drop
 
@@ -33,4 +42,4 @@ jobs:
      runOnce:
        deploy:
           steps:
-          - script: echo my first deployment
+          - script: echo "my first deployment"
