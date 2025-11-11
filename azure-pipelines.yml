@@ -26,9 +26,9 @@ jobs:
   dependsOn: Build
   condition: succeeded()
   environment:
-    name: <environment-name>
+    name: Lab2
     resourceType: VirtualMachine
-    tags: <VMtag>
+    tags: kali, kali2
   strategy:
      runOnce:
        deploy:
